@@ -13,10 +13,8 @@ public class SimpleLinkedListTest {
     public static void main(String[] args) {
         
         //2.2 Revise SimpleLinkedListTest
-        
-        //create an empty singly linked list of int values        
+        //create an empty singly linked list of int values
         //append some integers
-    
         //For method size, use one test case.
         //test all other methods using at least 2 calls:
         //  successful call, e.g. call indexOf(..) and pass an existing integer
@@ -31,7 +29,8 @@ public class SimpleLinkedListTest {
         numbers.add(10);
         numbers.add(20);
         numbers.add(30);
-        
+        //numbers.add(1,2);
+        numbers.removeByValue(10);
         //dump the contents in the list in the original order
         System.out.println(numbers);
         //or use:

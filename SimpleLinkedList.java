@@ -17,14 +17,18 @@ public class SimpleLinkedList {
     //You are NOT allowed to add or remove data fields to/from SimpleLinkedList class. 
     //You are NOT allowed to change the definition of Node class.
     
-    //2.1.1 What Code to Add
+    //2.1.1 What Code to Add+6
     //-----Required ---------------//    
     
     //Remove the first occurrence of the specified item from this linked list. 
     // If success, return true. Otherwise, return false.
     public boolean removeByValue(int item) {
         //add your own code
-        
+        Node current = head;
+        while(indexOf(item) < size()) {
+            current = current.next;
+        }
+        current = current.next.next;
         //Hint:
         //  call your indexOf(...) to locate the item,
         //  convert the following in SingleLinkedList<E>
@@ -43,9 +47,20 @@ public class SimpleLinkedList {
     //add item to be at [index];
     // if index is [0, size-1], insert item between [index-1] and [index]
     // if index is size, append item to the end of this linked list.
-    public void add(int index, int item) {
+   public void add(int index, int item) {
         //add your own code
-        
+        Node current = head;
+        Node temp = new Node(item);
+        for(int i = 0; i < index -1; ++i) {
+            current = current.next;
+        }
+        if(index == 0) {
+            temp.next = current.next;
+        }
+        else {
+            temp.next = current.next;
+            current.next = temp;
+        }
         //Hint:
         //convert the following in SingleLinkedList<E>
         //    public void add(int index, E item)
@@ -58,15 +73,18 @@ public class SimpleLinkedList {
     //Get the integer item at the specified position and return the integer value. 
     //If the index is not valid, throw an exception or print an error message 
     //  and return Integer.MIN_VALUE.
-    public int get(int index) {
+   public int get(int index) {
         //add your own code
-        
+        Node current = head;
+        for(int i = 0; i < index; ++i) {
+            current = current.next;
+        }
         //Hint:
 	//convert the following in SingleLinkedList<E>
         //    public E get(int index)
         //    private Node<E> getNode(int index)       
         
-        return 2;
+        return current.data;
 
     }
 
@@ -74,35 +92,53 @@ public class SimpleLinkedList {
     //If the item is found, return its index. Otherwise return -1.
     public int indexOf(int item) {
         //add your own code
-        
-        //Hint:
+        //
+        Node current = head;
+        int index = 0;
+        while(index < size()) {
+            if(current.data == item) {
+              break;
+            }
+            else {
+                current = current.next;
+                index += 1;
+            }
+        }
         //use a looping like the one in toString()
         //in addition, add a counter, 
         //    increment the counter for each element checked 
         //can use size for loop control.
         
-        return -1;
+        return index;
     }
 
     //Find out if the specified integer: item is in this linked list. 
     // Returns true if yes, false otherwise.
     public boolean contains(int item) {
         //add your own code
-        
+        boolean doesContain = false;
+        if(indexOf(item) != size()) {
+            doesContain = true;
+        }
         //Hint:
         //can either call indexOf(...) 
         //    or directly search for the item using a loop like the one in toString()
 
-        return false;
+        return doesContain;
     }
 
     //return how many integers are in this linked list
     public int size() {
         //add your own code
-        
+        Node current = head;
+        int size = 0;
+        while(current != null) {
+            current = current.next;
+            size += 1;
+        }
         //Hint: this is actually a getter
         
-        return 0;
+        return size;
     }
 
     //-----Bonus ---------------//
