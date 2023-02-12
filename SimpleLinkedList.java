@@ -25,10 +25,16 @@ public class SimpleLinkedList {
     public boolean removeByValue(int item) {
         //add your own code
         Node current = head;
-        while(indexOf(item) < size()) {
+        Node preceding = head;
+        for(int i = 0; i <= indexOf(item); ++i) {
             current = current.next;
+            System.out.println(toString());
+            if(i < indexOf(item)) {
+                preceding = preceding.next;
+                System.out.println(toString());
+            }
         }
-        current = current.next.next;
+        current = preceding;
         //Hint:
         //  call your indexOf(...) to locate the item,
         //  convert the following in SingleLinkedList<E>
@@ -55,7 +61,7 @@ public class SimpleLinkedList {
             current = current.next;
         }
         if(index == 0) {
-            temp.next = current.next;
+            temp.next = head;
         }
         else {
             temp.next = current.next;
