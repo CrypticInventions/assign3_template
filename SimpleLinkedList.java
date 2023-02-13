@@ -26,15 +26,22 @@ public class SimpleLinkedList {
         //add your own code
         Node current = head;
         Node preceding = head;
-        for(int i = 0; i <= indexOf(item); ++i) {
+        for(int i = 1; i <= indexOf(item); ++i) {
             current = current.next;
-            System.out.println(toString());
+
             if(i < indexOf(item)) {
                 preceding = preceding.next;
-                System.out.println(toString());
+
             }
         }
-        current = preceding;
+        System.out.println("Current: " + current.data);
+        System.out.println("preceding: " + preceding.data);
+        if(current.next != preceding.next) {
+            preceding.next = current.next;
+        }
+        else {
+            head = current.next;
+        }
         //Hint:
         //  call your indexOf(...) to locate the item,
         //  convert the following in SingleLinkedList<E>
@@ -61,7 +68,8 @@ public class SimpleLinkedList {
             current = current.next;
         }
         if(index == 0) {
-            temp.next = head;
+            head = temp;
+            temp.next = current;
         }
         else {
             temp.next = current.next;

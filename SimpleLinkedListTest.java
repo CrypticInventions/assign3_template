@@ -30,8 +30,8 @@ public class SimpleLinkedListTest {
         numbers.add(20);
         numbers.add(30);
         //numbers.add(1,2);
-        numbers.add(1,2);
-        numbers.removeByValue(10);
+        numbers.add(0,2);
+       // numbers.removeByValue(1);
         //dump the contents in the list in the original order
         System.out.println(numbers);
         //or use:
