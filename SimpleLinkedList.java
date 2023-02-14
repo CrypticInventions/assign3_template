@@ -22,10 +22,13 @@ public class SimpleLinkedList {
     
     //Remove the first occurrence of the specified item from this linked list. 
     // If success, return true. Otherwise, return false.
-    public boolean removeByValue(int item) {
+    public boolean removeByValue(int item) { //done
         //add your own code
         Node current = head;
         Node preceding = head;
+        if(indexOf(item) == -1) {
+            return false;
+        }
         for(int i = 1; i <= indexOf(item); ++i) {
             current = current.next;
 
@@ -54,13 +57,13 @@ public class SimpleLinkedList {
         //   predecessor node reference        
         //   current node reference
         
-        return false;
+        return true;
     }
 
     //add item to be at [index];
     // if index is [0, size-1], insert item between [index-1] and [index]
     // if index is size, append item to the end of this linked list.
-   public void add(int index, int item) {
+   public void add(int index, int item) { //done
         //add your own code
         Node current = head;
         Node temp = new Node(item);
@@ -87,12 +90,20 @@ public class SimpleLinkedList {
     //Get the integer item at the specified position and return the integer value. 
     //If the index is not valid, throw an exception or print an error message 
     //  and return Integer.MIN_VALUE.
-   public int get(int index) {
+   public int get(int index) { //done
         //add your own code
         Node current = head;
+        try {
         for(int i = 0; i < index; ++i) {
             current = current.next;
         }
+
+        }
+        catch(Exception e) {
+            System.out.println("Error invalid index");
+            return Integer.MIN_VALUE;
+        }
+
         //Hint:
 	//convert the following in SingleLinkedList<E>
         //    public E get(int index)
@@ -104,7 +115,7 @@ public class SimpleLinkedList {
 
     //Search this linked list for the first occurrence of the specified integer: item. 
     //If the item is found, return its index. Otherwise return -1.
-    public int indexOf(int item) {
+    public int indexOf(int item) { //done
         //add your own code
         //
         Node current = head;
@@ -117,6 +128,10 @@ public class SimpleLinkedList {
                 current = current.next;
                 index += 1;
             }
+            if(index == size()) {
+                index = -1;
+                break;
+            }
         }
         //use a looping like the one in toString()
         //in addition, add a counter, 
@@ -128,7 +143,7 @@ public class SimpleLinkedList {
 
     //Find out if the specified integer: item is in this linked list. 
     // Returns true if yes, false otherwise.
-    public boolean contains(int item) {
+    public boolean contains(int item) { //done
         //add your own code
         boolean doesContain = false;
         if(indexOf(item) != size()) {
@@ -142,7 +157,7 @@ public class SimpleLinkedList {
     }
 
     //return how many integers are in this linked list
-    public int size() {
+    public int size() { //done
         //add your own code
         Node current = head;
         int size = 0;

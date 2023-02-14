@@ -33,7 +33,11 @@ public class SimpleLinkedListTest {
         numbers.add(0,2);
        // numbers.removeByValue(1);
         //dump the contents in the list in the original order
+        numbers.get(2);
+        numbers.get(10);
+        numbers.removeByValue(30);
         System.out.println(numbers);
+        System.out.println(numbers.removeByValue(99));
         //or use:
         //System.out.println(numbers.toString());        
     }   
