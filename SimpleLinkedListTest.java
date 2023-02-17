@@ -30,14 +30,19 @@ public class SimpleLinkedListTest {
         numbers.add(20);
         numbers.add(30);
         //numbers.add(1,2);
-        numbers.add(0,2);
-       // numbers.removeByValue(1);
-        //dump the contents in the list in the original order
-        numbers.get(2);
-        numbers.get(10);
-        numbers.removeByValue(30);
+        //numbers.add(0,2)
         System.out.println(numbers);
-        System.out.println(numbers.removeByValue(99));
+
+        numbers.add(3,1); //valid test
+        //numbers.add(5,101); //invalid test
+        System.out.println("new list: " + numbers);
+        // numbers.removeByValue(1);
+        //dump the contents in the list in the original order
+        System.out.println(numbers.get(2)); //valid test
+        numbers.get(10); // invalid test
+        numbers.removeByValue(1); //valid test
+        //numbers.removeByValue(22); //invalid test
+        System.out.println(numbers.indexOf(22));
         //or use:
         //System.out.println(numbers.toString());        
     }   

@@ -9,40 +9,39 @@ package assign3_template;
 public class SimpleLinkedList {
 
     //-------Start of Assign 3  --------/  
-    
+
     //2.1.2 Coding Requirements
     //You can call other methods to complete a method.
     //You can also add private methods, and then call these methods 
     //  to complete a method required in this assignment. 
     //You are NOT allowed to add or remove data fields to/from SimpleLinkedList class. 
     //You are NOT allowed to change the definition of Node class.
-    
+
     //2.1.1 What Code to Add+6
     //-----Required ---------------//    
-    
+
     //Remove the first occurrence of the specified item from this linked list. 
     // If success, return true. Otherwise, return false.
     public boolean removeByValue(int item) { //done
         //add your own code
         Node current = head;
         Node preceding = head;
-        if(indexOf(item) == -1) {
+        if (indexOf(item) == -1) {
             return false;
         }
-        for(int i = 1; i <= indexOf(item); ++i) {
+        for (int i = 1; i <= indexOf(item); ++i) {
             current = current.next;
 
-            if(i < indexOf(item)) {
+            if (i < indexOf(item)) {
                 preceding = preceding.next;
 
             }
         }
-        System.out.println("Current: " + current.data);
-        System.out.println("preceding: " + preceding.data);
-        if(current.next != preceding.next) {
+        if (current.next == null) {
+            preceding.next = null;
+        } else if (current.next != preceding.next) {
             preceding.next = current.next;
-        }
-        else {
+        } else {
             head = current.next;
         }
         //Hint:
@@ -51,64 +50,70 @@ public class SimpleLinkedList {
         //     private E removeFirst()        
         //     private Node<E> getNode(int index)         
         //     private E removeAfter(Node<E> node)
-        
-        
+
+
         //Hint: if you implement this from scratch, remember to save:
         //   predecessor node reference        
         //   current node reference
-        
+
         return true;
     }
 
     //add item to be at [index];
     // if index is [0, size-1], insert item between [index-1] and [index]
     // if index is size, append item to the end of this linked list.
-   public void add(int index, int item) { //done
+    public void add(int index, int item) { //done
         //add your own code
         Node current = head;
         Node temp = new Node(item);
-        for(int i = 0; i < index -1; ++i) {
-            current = current.next;
-        }
-        if(index == 0) {
-            head = temp;
-            temp.next = current;
-        }
-        else {
-            temp.next = current.next;
-            current.next = temp;
+        try {
+            for (int i = 0; i < index - 1; ++i) {
+                current = current.next;
+            }
+            if (index == 0) {
+                System.out.println("Integer: " + head.data + " currently in that space");
+                head = temp;
+                temp.next = current;
+            } else if (index == size()) {
+                current.next = temp;
+            } else {
+                System.out.println("Integer: " + current.next.data + " currently in that space");
+                temp.next = current.next;
+                current.next = temp;
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid index");
         }
         //Hint:
         //convert the following in SingleLinkedList<E>
         //    public void add(int index, E item)
- 	//    public void addFirst(E item)
+        //    public void addFirst(E item)
         //    private Node<E> getNode(int index)
-    	//    private void addAfter(Node<E> node, E item)          
-        
+        //    private void addAfter(Node<E> node, E item)
+
     }
 
     //Get the integer item at the specified position and return the integer value. 
     //If the index is not valid, throw an exception or print an error message 
     //  and return Integer.MIN_VALUE.
-   public int get(int index) { //done
+    public int get(int index) { //done
         //add your own code
         Node current = head;
         try {
-        for(int i = 0; i < index; ++i) {
-            current = current.next;
-        }
+            for (int i = 0; i < index; ++i) {
+                current = current.next;
+            }
 
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Error invalid index");
             return Integer.MIN_VALUE;
         }
 
         //Hint:
-	//convert the following in SingleLinkedList<E>
+        //convert the following in SingleLinkedList<E>
         //    public E get(int index)
         //    private Node<E> getNode(int index)       
-        
+
         return current.data;
 
     }
@@ -118,26 +123,38 @@ public class SimpleLinkedList {
     public int indexOf(int item) { //done
         //add your own code
         //
+
         Node current = head;
         int index = 0;
-        while(index < size()) {
-            if(current.data == item) {
-              break;
+
+            while (current.data != item) {
+                if (current.data == item) {
+                    break;
+
+                }
+
+                else{
+                    try {
+                        current = current.next;
+                        index += 1;
+                    }
+                    catch(Exception e) {
+                        index = -1;
+                        break;
+                    }
+                    }
+
+
             }
-            else {
-                current = current.next;
-                index += 1;
-            }
-            if(index == size()) {
-                index = -1;
-                break;
-            }
-        }
+
+
+
+
+
         //use a looping like the one in toString()
         //in addition, add a counter, 
         //    increment the counter for each element checked 
         //can use size for loop control.
-        
         return index;
     }
 
@@ -159,12 +176,7 @@ public class SimpleLinkedList {
     //return how many integers are in this linked list
     public int size() { //done
         //add your own code
-        Node current = head;
-        int size = 0;
-        while(current != null) {
-            current = current.next;
-            size += 1;
-        }
+
         //Hint: this is actually a getter
         
         return size;
@@ -187,8 +199,29 @@ public class SimpleLinkedList {
         //Hint: if you implement this from scratch, remember to save:
         //   predecessor node reference        
         //   current node reference
+        Node current = head;
+        Node preceding = head;
+        if(index > size() || index < 0) {
+            System.out.println("Error invalid index");
+            return Integer.MIN_VALUE;
+        }
+        for(int i = 1; i <= index; ++i) {
+            current = current.next;
+
+            if(i < index) {
+                preceding = preceding.next;
+
+            }
+        }
+
+        if(current.next != preceding.next) {
+            preceding.next = current.next;
+        }
+        else {
+            head = current.next;
+        }
         
-        return 2;
+        return current.data;
     }
 
     //-------End of Assign 3 --------/ 
